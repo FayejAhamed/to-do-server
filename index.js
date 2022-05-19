@@ -18,20 +18,20 @@ async function run() {
       const taskCollection = client.db("toCollection").collection("service");
 
  //post and add new inventory
- app.post("/addtask",async(req,res)=>{
+ app.post("/add",async(req,res)=>{
   const task = req.body;
   const getUserTask = await taskCollection.insertOne(task);
   res.send(getUserTask )
 })
 //show user task 
-app.get("/addtask",async(req,res)=>{
+app.get("/add",async(req,res)=>{
     const query = {};
     const cursor = taskCollection.find(query);
     const tasks = await cursor.toArray();
     res.send(tasks );
 })
    //delete
-   app.delete("/addtaskDelete/:Id",async(req,res)=>{
+   app.delete("/addDelete/:Id",async(req,res)=>{
     const Id = req.params.Id
     const query = {_id:ObjectId(Id)};
     const result = await taskCollection.deleteOne(query);
